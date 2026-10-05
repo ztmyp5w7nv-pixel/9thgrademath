@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>9. Sınıf Matematik Akademisi (2026 Müfredatı & Üslü Sayılar)</title>
+  <meta name="description" content="2026 MEB Maarif Modeli 9. Sınıf Matematik uygulaması. Üslü sayılar, tüm müfredat, 250+ çözümlü soru, oyunlaştırılmış testler ve akıllı bilgi kartları.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX (Hızlı & Kusursuz Matematik Formülleri) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Canvas Confetti (Kutlama Efektleri) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Stil Dosyası -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Üst Başlık (Header) -->
+    <header class="header-bar">
+      <div class="logo-area" onclick="App.switchView('home')">
+        <div class="logo-badge">9</div>
+        <div class="logo-text">
+          <h1>Matematik</h1>
+          <span>2026 Maarif Modeli</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="stat-chip streak" title="Günlük Seri">
+          🔥 <span id="header-streak">1 Gün</span>
+        </div>
+        <div class="stat-chip xp" title="Kazanılan XP">
+          ⚡ <span id="header-xp">0 XP</span>
+        </div>
+        <button class="sound-btn" id="sound-toggle-btn" title="Sesi Aç/Kapat">
+          🔊
+        </button>
+      </div>
+    </header>
+
+    <!-- =========================================================
+         1. ANA SAYFA GÖRÜNÜMÜ (VIEW: HOME)
+         ========================================================= -->
+    <main id="view-home" class="view-section active">
+      <!-- Hero Banner -->
+      <div class="hero-card">
+        <div class="hero-tag">✨ Sıfır Kayıt & Sonsuz Matematik</div>
+        <h2 class="hero-title">9. Sınıf Matematik Dünyasına Hoş Geldin!</h2>
+        <p class="hero-desc">
+          Özellikle üslü sayılar odaklı, tüm 2026 9. sınıf MEB müfredatını kapsayan 269 çözümlü soru, oyunlaştırılmış boss savaşları ve 105 akıllı formül kartı seni bekliyor!
+        </p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn-primary" onclick="App.openTopic('uslu_sayilar')">
+            ⚡ Üslü Sayılara Başla
+          </button>
+          <button class="btn-secondary" onclick="QuizModule.startTest('mini')">
+            ⏱️ 10 Soruluk Test
+          </button>
+        </div>
+      </div>
+
+      <!-- Seviye Kartı -->
+      <div class="card" style="margin-bottom:20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+          <span style="font-size:0.9rem; font-weight:800; color:var(--primary);" id="home-level-title">
+            Seviye 1: Çırak Matematikçi
+          </span>
+          <span style="font-size:0.78rem; color:var(--text-muted);" id="home-level-desc">
+            0 / 100 XP
+          </span>
+        </div>
+        <div class="quiz-progress-bar" style="margin-bottom:0;">
+          <div class="quiz-progress-fill" id="home-level-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Hızlı Aksiyon Kutuları -->
+      <div class="action-grid">
+        <div class="action-tile" onclick="App.openTopic('uslu_sayilar')">
+          <div class="action-icon" style="background:#ecfdf5; color:#10b981;">⚡</div>
+          <div>
+            <div class="action-title">Üslü Sayılar</div>
+            <div class="action-subtitle">Özel Laboratuvar & 35 Soru</div>
+          </div>
+        </div>
+
+        <div class="action-tile" onclick="App.switchView('quiz')">
+          <div class="action-icon" style="background:#eef2ff; color:#4f46e5;">📝</div>
+          <div>
+            <div class="action-title">Soru Bankası</div>
+            <div class="action-subtitle">269 Çözümlü Soru</div>
+          </div>
+        </div>
+
+        <div class="action-tile" onclick="App.switchView('cards')">
+          <div class="action-icon" style="background:#f5f3ff; color:#8b5cf6;">🃏</div>
+          <div>
+            <div class="action-title">Bilgi Kartları</div>
+            <div class="action-subtitle">105 Formül Kartı</div>
+          </div>
+        </div>
+
+        <div class="action-tile" onclick="App.switchView('games')">
+          <div class="action-icon" style="background:#fff1f2; color:#f43f5e;">🐉</div>
+          <div>
+            <div class="action-title">Boss Savaşı</div>
+            <div class="action-subtitle">Canavarlarla Düello</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hızlı Özet Sayaçları -->
+      <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom:24px;">
+        <div class="stat-box">
+          <div class="stat-value" id="home-stat-solved" style="font-size:1.3rem;">0 / 269</div>
+          <div class="stat-title">Çözülen Soru</div>
+        </div>
+        <div class="stat-box" onclick="App.switchView('quiz'); QuizModule.setStatusFilter('wrong');" style="cursor:pointer;">
+          <div class="stat-value" style="color:var(--rose); font-size:1.3rem;" id="home-stat-wrong">0</div>
+          <div class="stat-title">Yanlışlar ➔</div>
+        </div>
+        <div class="stat-box" onclick="App.switchView('cards');" style="cursor:pointer;">
+          <div class="stat-value" style="color:#8b5cf6; font-size:1.3rem;" id="home-stat-cards">0 / 105</div>
+          <div class="stat-title">Kartlar ➔</div>
+        </div>
+      </div>
+
+      <!-- Tüm Üniteler Listesi -->
+      <div class="section-header">
+        <h3 class="section-title">📚 2026 Müfredat Üniteleri</h3>
+        <button class="btn-secondary" style="font-size:0.75rem; padding:6px 10px;" onclick="App.switchView('topics')">
+          Tümünü Gör ➔
+        </button>
+      </div>
+
+      <div id="home-units-list">
+        <!-- JS ile doldurulacak -->
+      </div>
+    </main>
+
+    <!-- =========================================================
+         2. KONULAR GÖRÜNÜMÜ (VIEW: TOPICS)
+         ========================================================= -->
+    <main id="view-topics" class="view-section">
+      <div style="margin-bottom:18px;">
+        <h2 style="font-size:1.3rem; font-weight:800;">📖 9. Sınıf Konu Anlatımları</h2>
+        <p style="font-size:0.85rem; color:var(--text-muted);">
+          Oyun gibi mikro dersler, altın kurallar, sınav tuzakları ve interaktif simülatörler.
+        </p>
+      </div>
+      <div id="topics-view-container">
+        <!-- JS ile doldurulacak -->
+      </div>
+    </main>
+
+    <!-- =========================================================
+         3. SORU BANKASI GÖRÜNÜMÜ (VIEW: QUIZ)
+         ========================================================= -->
+    <main id="view-quiz" class="view-section">
+      <div id="quiz-view-container">
+        <!-- JS ile doldurulacak -->
+      </div>
+    </main>
+
+    <!-- =========================================================
+         4. BİLGİ KARTLARI GÖRÜNÜMÜ (VIEW: CARDS)
+         ========================================================= -->
+    <main id="view-cards" class="view-section">
+      <div id="cards-view-container">
+        <!-- JS ile doldurulacak -->
+      </div>
+    </main>
+
+    <!-- =========================================================
+         5. OYUN ARENASI GÖRÜNÜMÜ (VIEW: GAMES)
+         ========================================================= -->
+    <main id="view-games" class="view-section">
+      <div id="games-view-container">
+        <!-- JS ile doldurulacak -->
+      </div>
+    </main>
+
+    <!-- =========================================================
+         6. PROFİL & İSTATİSTİK GÖRÜNÜMÜ (VIEW: PROFILE)
+         ========================================================= -->
+    <main id="view-profile" class="view-section">
+      <div class="card" style="text-align:center; padding:24px 16px; margin-bottom:18px;">
+        <div style="font-size:3.5rem; margin-bottom:8px;">🎓</div>
+        <h2 style="font-size:1.25rem; font-weight:800;" id="profile-name-display">9. Sınıf Öğrencisi</h2>
+        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">2026 Maarif Matematik Şampiyonu Adayı</p>
+        <span class="meta-pill" style="background:#ecfdf5; color:#047857; font-weight:700; padding:6px 14px;">
+          🔒 Hesap Gerekmez • Tüm İlerleme Tarayıcında Güvende
+        </span>
+      </div>
+
+      <div class="stats-grid" id="profile-stats-container">
+        <!-- JS ile doldurulacak -->
+      </div>
+
+      <!-- Rozetler -->
+      <div class="section-header" style="margin-top:20px;">
+        <h3 class="section-title">🏅 Başarı Rozetlerin</h3>
+      </div>
+      <div class="badge-grid" id="profile-badges-container">
+        <!-- JS ile doldurulacak -->
+      </div>
+
+      <!-- Ayarlar & Sıfırlama -->
+      <div class="card" style="margin-top:24px;">
+        <h4 style="font-size:0.95rem; font-weight:800; margin-bottom:10px;">⚙️ Veri Yönetimi</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:14px;">
+          Bu uygulama hiçbir kişisel veri toplamaz. İlerlemeyi sıfırlamak istersen aşağıdaki butonu kullanabilirsin.
+        </p>
+        <button class="btn-secondary" style="color:var(--rose); border-color:#fecdd3;" onclick="if(confirm('Tüm çözülen sorular ve XP sıfırlansın mı?')) { localStorage.removeItem('matematik9_state'); location.reload(); }">
+          🗑️ İlerlemeyi Sıfırla
+        </button>
+      </div>
+    </main>
+
+    <!-- =========================================================
+         ALT NAVİGASYON (MOBİL BAR)
+         ========================================================= -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-view="home">
+        <span class="nav-icon">🏠</span>
+        <span>Ana Sayfa</span>
+      </button>
+      <button class="nav-item" data-view="topics">
+        <span class="nav-icon">📖</span>
+        <span>Konular</span>
+      </button>
+      <button class="nav-item" data-view="quiz">
+        <span class="nav-icon">📝</span>
+        <span>Sorular</span>
+      </button>
+      <button class="nav-item" data-view="cards">
+        <span class="nav-icon">🃏</span>
+        <span>Kartlar</span>
+      </button>
+      <button class="nav-item" data-view="games">
+        <span class="nav-icon">⚔️</span>
+        <span>Oyunlar</span>
+      </button>
+      <button class="nav-item" data-view="profile">
+        <span class="nav-icon">👤</span>
+        <span>Profil</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- =========================================================
+       SİMÜLATÖR MODAL POPUP (İNTERAKTİF DENEY MASASI)
+       ========================================================= -->
+  <div id="sim-modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="InteractiveModule.closeModal()">✕</button>
+      <div id="sim-modal-body">
+        <!-- JS ile dinamik simülatör yüklenecek -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Bildirim Kutusu -->
+  <div id="toast-msg" style="position:fixed; bottom:80px; left:50%; transform:translateX(-50%); background:#0f172a; color:white; padding:10px 18px; border-radius:99px; font-size:0.84rem; font-weight:700; box-shadow:0 10px 25px rgba(0,0,0,0.2); z-index:999; display:none; transition:opacity 0.3s; pointer-events:none;"></div>
+
+  <!-- Veri ve Modül Scriptleri -->
+  <script src="js/data-questions.js"></script>
+  <script src="js/data-topics.js"></script>
+  <script src="js/data-flashcards.js"></script>
+  <script src="js/interactive.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

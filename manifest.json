@@ -1,0 +1,16 @@
+{
+  "name": "9. Sınıf Matematik 2026",
+  "short_name": "Matematik 9",
+  "description": "2026 9. Sınıf MEB Müfredatı Matematik Eğitim ve Soru Bankası",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
